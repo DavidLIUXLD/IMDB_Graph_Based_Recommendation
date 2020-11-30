@@ -6,6 +6,7 @@ private:
 	int ID;
 	string title;
 	string genre;
+	int distance;
 
 
 public:
