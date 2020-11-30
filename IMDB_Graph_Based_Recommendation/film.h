@@ -31,5 +31,21 @@ public:
 	{
 		return this->genre;
 	}
+	
+	//comparison operator overloading
+	bool operator< (const film& other) 
+	{
+		return this->distance < other.distance;
+	}
+
+	bool operator> (const film& other)
+	{
+		return this->distance > other.distance;
+	}
+
+	bool operator== (const film& other)
+	{
+		return this->distance == other.distance;
+	}
 };
 
