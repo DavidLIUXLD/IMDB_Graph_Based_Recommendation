@@ -6,7 +6,7 @@ private:
 	int ID;
 	string title;
 	string genre;
-	int distance;
+	float distance;
 
 
 public:
@@ -30,6 +30,11 @@ public:
 	string getGenre()
 	{
 		return this->genre;
+	}
+
+	float getDist() 
+	{
+		return this->distance;
 	}
 	
 	//comparison operator overloading
