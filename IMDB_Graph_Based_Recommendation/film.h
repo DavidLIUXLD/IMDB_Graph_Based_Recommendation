@@ -11,8 +11,6 @@ private:
 	vector<int> keywords;
 	float distance;
 
-
-
 public:
 	film() 
 	{
@@ -22,7 +20,7 @@ public:
 	};
 
 	film(int ID, string title, vector<int> genres, vector<int> keywords)
-	{
+	{	
 		this->ID = ID;
 		this->title = title;
 		this->genres = genres;
