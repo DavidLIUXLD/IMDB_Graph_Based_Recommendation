@@ -1,20 +1,33 @@
 #include<string>
+#include<unordered_set>
+#include<vector>
 using namespace std;
 class film
 {
 private:
 	int ID;
 	string title;
-	string genre;
+	vector<int> genres;
+	vector<int> keywords;
 	float distance;
 
 
+
 public:
-	film(int ID, string title, string genre)
+	film() 
+	{
+		ID = -1;
+		title = "";
+		distance = -1;
+	};
+
+	film(int ID, string title, vector<int> genres, vector<int> keywords)
 	{
 		this->ID = ID;
 		this->title = title;
-		this->genre = genre;
+		this->genres = genres;
+		this->keywords = keywords;
+		distance = INT_MAX;
 	}
 
 	int getID()
@@ -27,9 +40,14 @@ public:
 		return this->title;
 	}
 
-	string getGenre()
+	vector<int> getGenres()
 	{
-		return this->genre;
+		return this->genres;
+	}
+
+	vector<int> getKeywords()
+	{
+		return this->keywords;
 	}
 
 	float getDist() 
