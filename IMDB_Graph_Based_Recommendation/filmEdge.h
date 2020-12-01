@@ -8,7 +8,10 @@ private:
 	float similarityScore;
 
 public:
-
+	filmEdge()
+	{
+		this->similarityScore = -1;
+	}
 
 	filmEdge(film from, film to, float similiarityScore)
 	{
