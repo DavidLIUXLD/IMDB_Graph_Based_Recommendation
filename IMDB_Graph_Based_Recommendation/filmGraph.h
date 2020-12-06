@@ -39,6 +39,9 @@ private:
 	}
 
 public:
+	//given unordered_map filmCollections mapping film IDs to film titles, unordered_map genreCollection
+	//mapping from film IDs to a list of genre IDs, and unordered_map keywordCollection mapping from 
+	//film IDs to a list of keyword IDs, construct the filmGraph object
 	filmGraph(unordered_map<int,string> filmCollection, unordered_map<int, vector<int>> genreCollection,
 			  unordered_map<int,vector<int>> keywordCollection) 
 	{

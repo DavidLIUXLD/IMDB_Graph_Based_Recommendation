@@ -140,9 +140,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="film.h" />
+    <ClInclude Include="filmEdge.h" />
+    <ClInclude Include="filmGraph.h" />
+    <ClInclude Include="reviewer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="film.cpp" />
+    <ClCompile Include="filmEdge.cpp" />
+    <ClCompile Include="filmGraph.cpp" />
+    <ClCompile Include="reviewer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
