@@ -1,5 +1,4 @@
 #include<string>
-#include<unordered_set>
 #include<vector>
 using namespace std;
 class film
@@ -52,21 +51,39 @@ public:
 	{
 		return this->distance;
 	}
-	
+	void setDist(float distance) 
+	{
+		this->distance = distance;
+	}
 	//comparison operator overloading
 	bool operator< (const film& other) 
 	{
-		return this->distance < other.distance;
+		if (this->distance < other.distance) {
+			return true;
+		}
+		else if(this->ID < other.ID){
+			return true;
+		}
+		return false;
 	}
 
 	bool operator> (const film& other)
 	{
-		return this->distance > other.distance;
+		if (this->distance > other.distance) {
+			return true;
+		}
+		else if (this->ID > other.ID) {
+			return true;
+		}
+		return false;
 	}
 
 	bool operator== (const film& other)
 	{
-		return this->distance == other.distance;
+		if (this->ID == other.ID) {
+			return true;
+		}
+		return false;
 	}
 };
 

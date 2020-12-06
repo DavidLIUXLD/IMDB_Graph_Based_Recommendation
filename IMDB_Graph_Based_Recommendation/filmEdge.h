@@ -19,5 +19,29 @@ public:
 		this->to = to;
 		similarityScore = similarityScore;
 	}
+
+	bool operator< (const filmEdge& other)
+	{
+		if (this->similarityScore < other.similarityScore) {
+			return true;
+		}
+		return false;
+	}
+
+	bool operator> (const filmEdge& other)
+	{
+		if (this->similarityScore > other.similarityScore) {
+			return true;
+		}
+		return false;
+	}
+
+	bool operator== (const filmEdge& other)
+	{
+		if (this->from == other.from and this->to == other.to) {
+			return true;
+		}
+		return false;
+	}
 };
 
