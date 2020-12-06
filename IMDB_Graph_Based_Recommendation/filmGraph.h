@@ -9,10 +9,13 @@ class filmGraph
 {
 
 private: 
+	//adjacentList for film nodes
 	unordered_map<film, unordered_set<filmEdge>> adjacentList;
+	//collection of all films 
 	unordered_set<film> films;
-	unordered_set<filmEdge> filmEdges;
 
+	//return the inverse of jaccard similarity between two vectors,
+	//if the jaccard similiarity between given vectors is zero, return zero
 	float similarityScore(vector<int> listA, vector<int> listB)
 	{
 		unordered_set<int> uniqueItem;
@@ -39,6 +42,7 @@ public:
 	filmGraph(unordered_map<int,string> filmCollection, unordered_map<int, vector<int>> genreCollection,
 			  unordered_map<int,vector<int>> keywordCollection) 
 	{
+		//temperary collection of films for better iteration access
 		vector<film> storage;
 		for (int i = 0; i <= filmCollection.size(); i++) 
 		{
@@ -49,12 +53,13 @@ public:
 		for (int i = 0; i <= films.size(); i ++)
 		{
 			for (int j = i + 1; j <= films.size(); j ++)
-			{
+			{	
+				//calculate similarityScore based on genres of the film
 				float similarityScore;
-				int commonGenre = 0;
 				vector<int> genresOne = storage.at(i).getGenres();
 				vector<int> genresTwo = storage.at(j).getGenres();
 				similarityScore = 10 * this->similarityScore(genresOne, genresTwo);
+				//two films share some genres, adding edge
 				if (similarityScore != 0)
 				{
 					vector<int> keywordOne = storage.at(i).getKeywords();
@@ -73,7 +78,6 @@ public:
 					}
 					adjacentList.at(storage.at(i)).insert(edge);
 					adjacentList.at(storage.at(j)).insert(edge);
-					filmEdges.insert(edge);
 				}
 			}
 		}
