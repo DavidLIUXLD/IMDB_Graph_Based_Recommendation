@@ -20,21 +20,32 @@ void read_Meta(unordered_map<int,string> filmCollection, unordered_map<int, vect
             getline(infs,first,',')
             int ID = stoi(first);
 
+            string info;
+            getline(infs,info,','); //title
+            filmCollection[ID]=info;//add title to map
+            info = "";//clear info
+
             string buffer;
             getline(infs,buffer);
             stringstream linestream(buffer);
+
             while(linestream.good()){
                 if(buffer=="[]"){
                     break;
                 }
-                string info;
-                getline(linestream,info,','); //title
-                filmCollection[ID]=info;//add title to map
-                info = "";//clear info
-
                 //genres
+                string throwaway;
+                getline(linestream,throwaway, ':' );
+                //use integer between colon and comma
+                getline(linestream, info, ',')
+                // add to vector in map
+                genreCollection[ID].push_back(stoi(info));
+                info = "";//clear string just in case
+                //find next comma(separating keywords) throwaway
+                getline(linestream, throwaway, ',');
 
             }
+            linestream.close();
         }
     }
 
