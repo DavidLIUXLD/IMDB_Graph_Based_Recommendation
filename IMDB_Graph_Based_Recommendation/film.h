@@ -1,11 +1,10 @@
+#pragma once
 #include<string>
 #include<vector>
 using namespace std;
 class film
 {
 private:
-	//unique ID for the film
-	int ID;
 	//film title
 	string title;
 	//collection of genre ID related to the film
@@ -14,14 +13,15 @@ private:
 	vector<int> keywords;
 	//distance to the starting point reserved exclusively for Dijkstra shortest path algorithm
 	float distance;
-
 public:
+	//public ID for Hashing
+	int ID;
 	//default constructor
 	film() 
 	{
 		ID = -1;
 		title = "";
-		distance = -1;
+		distance = -1.0;
 	};
 
 	//constructor with parameter
@@ -64,13 +64,13 @@ public:
 		return this->distance;
 	}
 
-	//set the 
-	void setDist(float distance) 
+	//set the distance
+	void setDist(float distance)  
 	{
 		this->distance = distance;
 	}
 	//comparison operator overloading for std::priorityqueue compatability 
-	bool operator< (const film& other) 
+	bool operator< (const film& other) const 
 	{
 		if (this->distance < other.distance) {
 			return true;
@@ -81,7 +81,7 @@ public:
 		return false;
 	}
 
-	bool operator> (const film& other)
+	bool operator> (const film& other) const
 	{
 		if (this->distance > other.distance) {
 			return true;
@@ -93,7 +93,7 @@ public:
 	}
 
 	//equal operator overloading dor std::unordered_set and std::unordered_map compatability
-	bool operator== (const film& other)
+	bool operator== (const film& other) const
 	{
 		if (this->ID == other.ID) {
 			return true;

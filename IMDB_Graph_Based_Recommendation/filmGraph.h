@@ -1,18 +1,21 @@
 #pragma once
 #include "film.h"
 #include "filmEdge.h"
+#include "filmHash.h"
+#include "filmEdge.h"
 #include <unordered_map>
 #include <unordered_set>
 #include <set>
 using namespace std;
+
 class filmGraph
 {
 
 private: 
 	//adjacentList for film nodes
-	unordered_map<film, unordered_set<filmEdge>> adjacentList;
+	unordered_map<film, vector<filmEdge>, filmHash> adjacentList;
 	//collection of all films 
-	unordered_set<film> films;
+	unordered_set<film, filmHash> films;
 
 	//return the inverse of jaccard similarity between two vectors,
 	//if the jaccard similiarity between given vectors is zero, return zero
@@ -47,15 +50,15 @@ public:
 	{
 		//temperary collection of films for better iteration access
 		vector<film> storage;
-		for (int i = 0; i <= filmCollection.size(); i++) 
+		for (int i = 0; i <= filmCollection.size() - 1; i++) 
 		{
 			film movie(i, filmCollection.at(i), genreCollection.at(i), keywordCollection.at(i));
 			films.insert(movie);
 			storage.push_back(movie);
 		}
-		for (int i = 0; i <= films.size(); i ++)
+		for (int i = 0; i <= films.size() - 1; i ++)
 		{
-			for (int j = i + 1; j <= films.size(); j ++)
+			for (int j = i + 1; j <= films.size() - 1; j ++)
 			{	
 				//calculate similarityScore based on genres of the film
 				float similarityScore;
@@ -68,19 +71,19 @@ public:
 					vector<int> keywordOne = storage.at(i).getKeywords();
 					vector<int> keywordTwo = storage.at(j).getKeywords();
 					similarityScore += 5 * this->similarityScore(keywordOne, keywordTwo);
-					filmEdge edge(storage.at(i), storage.at(j), similarityScore);
+					filmEdge edge(i, j, similarityScore);
 					if (adjacentList.count(storage.at(i)))
 					{
-						unordered_set<filmEdge> similarFilms;
+						vector<filmEdge> similarFilms;
 						adjacentList.insert(make_pair(storage.at(i), similarFilms));
 					}
 					if (adjacentList.count(storage.at(j)))
 					{
-						unordered_set<filmEdge> similarFilms;
+						vector<filmEdge> similarFilms;
 						adjacentList.insert(make_pair(storage.at(j), similarFilms));
 					}
-					adjacentList.at(storage.at(i)).insert(edge);
-					adjacentList.at(storage.at(j)).insert(edge);
+					adjacentList.at(storage.at(i)).push_back(edge);
+					adjacentList.at(storage.at(j)).push_back(edge);
 				}
 			}
 		}

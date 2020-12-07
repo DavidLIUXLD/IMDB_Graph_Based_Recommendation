@@ -2,21 +2,20 @@
 #include"film.h"
 class filmEdge
 {
-private:
-	film from;
-	film to;
+public:
+	int fromID;
+	int toID;
 	float similarityScore;
 
-public:
 	filmEdge()
 	{
 		this->similarityScore = -1;
 	}
 
-	filmEdge(film from, film to, float similiarityScore)
+	filmEdge(int fromID, int toID, float similiarityScore)
 	{
-		this->from = from;
-		this->to = to;
+		this->fromID = fromID;
+		this->toID = toID;
 		similarityScore = similarityScore;
 	}
 
@@ -38,7 +37,7 @@ public:
 
 	bool operator== (const filmEdge& other)
 	{
-		if (this->from == other.from and this->to == other.to) {
+		if (this->fromID == other.fromID and this->toID == other.toID) {
 			return true;
 		}
 		return false;
