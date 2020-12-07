@@ -48,7 +48,7 @@ public:
 	filmGraph(unordered_map<int,string> filmCollection, unordered_map<int, vector<int>> genreCollection,
 			  unordered_map<int,vector<int>> keywordCollection) 
 	{
-		//temperary collection of films for better iteration access
+		//temporary collection of films for better iteration access
 		vector<film> storage;
 		for (int i = 0; i <= filmCollection.size() - 1; i++) 
 		{
