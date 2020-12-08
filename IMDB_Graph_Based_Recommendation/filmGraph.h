@@ -10,10 +10,11 @@ using namespace std;
 class filmGraph
 {
 
-private: 
+private:
 	//adjacentList for film nodes
 	unordered_map<int, vector<filmEdge>> adjacentList;
-	unordered_map<string, film> films;
+	unordered_map<string, int> films;
+	unordered_map<int, film> filmDictionary;
 
 	//return the inverse of jaccard similarity between two vectors,
 	//if the jaccard similiarity between given vectors is zero, return zero
@@ -142,23 +143,24 @@ public:
 	//given unordered_map filmCollections mapping film IDs to film titles, unordered_map genreCollection
 	//mapping from film IDs to a list of genre IDs, and unordered_map keywordCollection mapping from 
 	//film IDs to a list of keyword IDs, construct the filmGraph object
-	filmGraph(unordered_map<int,string> filmCollection, unordered_map<int, vector<int>> genreCollection,
-			  unordered_map<int,vector<int>> keywordCollection) 
+	filmGraph(unordered_map<int, string> filmCollection, unordered_map<int, vector<int>> genreCollection,
+		unordered_map<int, vector<int>> keywordCollection)
 	{
 		//temperary collection of films for better iteration access
 		vector<film> storage;
-		for (auto itr : filmCollection) 
-		{	
+		for (auto itr : filmCollection)
+		{
 			int ID = itr.first;
 			string title = itr.second;
 			film movie(ID, title, genreCollection.at(ID), keywordCollection.at(ID));
-			films.insert(make_pair(title,movie));
+			films.insert(make_pair(title, ID));
+			filmDictionary.insert(make_pair(ID, movie));
 			storage.push_back(movie);
 		}
-		for (int i = 0; i <= storage.size() - 1; i ++)
+		for (int i = 0; i <= storage.size() - 1; i++)
 		{
-			for (int j = i + 1; j <= storage.size() - 1; j ++)
-			{	
+			for (int j = i + 1; j <= storage.size() - 1; j++)
+			{
 				//calculate similarityScore based on genres of the film
 				int AID = storage.at(i).getID();
 				int BID = storage.at(j).getID();
@@ -190,13 +192,13 @@ public:
 		}
 	}
 
-	vector<int> recommendation (string title)
+	vector<int> recommendationBySTD(string title)
 	{
 		vector<int> recommendation;
-		int sourceID = films.at(title).getID();
-		vector<pair<double,int>> distances = dijkstras(sourceID);
+		int sourceID = films.at(title);
+		vector<pair<double, int>> distances = dijkstras(sourceID);
 		sort(distances.begin(), distances.end());
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i <= 20; i++)
 		{
 			if (distances.at(i).second != sourceID) {
 				recommendation.push_back(distances.at(i).second);
@@ -208,15 +210,32 @@ public:
 	vector<int> recommendationByMerge(string title)
 	{
 		vector<int> recommendation;
-		int sourceID = films.at(title).getID();
+		int sourceID = films.at(title);
 		vector<pair<double, int>> distances = dijkstras(sourceID);
-		distances =  mergeSort(distances);
-		for (int i = 0; i < 20; i++)
+		distances = mergeSort(distances);
+		for (int i = 0; i <= 20; i++)
 		{
 			if (distances.at(i).second != sourceID) {
 				recommendation.push_back(distances.at(i).second);
 			}
 		}
 		return recommendation;
+	}
+
+	vector<string> recommendation(string title, string option)
+	{
+		vector<int> resultIDs;
+		if (option == "Q")
+		{
+			resultIDs = recommendationBySTD(title);
+		}else{
+			resultIDs = recommendationByMerge(title);
+		}
+		vector<string> result;
+		for (int i = 0; i <= resultIDs.size() - 1; i++)
+		{
+			result.push_back(filmDictionary.at(resultIDs.at(i)).getTitle());
+		}
+		return result;
 	}
 };
