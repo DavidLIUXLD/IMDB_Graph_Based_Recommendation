@@ -16,7 +16,9 @@ private:
 	unordered_map<film, vector<filmEdge>, filmHash> adjacentList;
 	//collection of all films 
 	unordered_set<film, filmHash> films;
-
+	
+	unordered_map<int, film> filmNames;
+	
 	//return the inverse of jaccard similarity between two vectors,
 	//if the jaccard similiarity between given vectors is zero, return zero
 	float similarityScore(vector<int> listA, vector<int> listB)
