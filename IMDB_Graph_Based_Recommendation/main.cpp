@@ -18,6 +18,8 @@ int main()
 	unordered_map<int, vector<int>> genreCollection;
 	read_Meta(filmCollection, genreCollection);
 
+	filmGraph h(filmCollection, genreCollection);
+
 	// end time
 	time_req = clock() - time_req;
 	// how to calculate in seconds
