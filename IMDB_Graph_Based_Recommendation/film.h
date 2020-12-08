@@ -5,6 +5,7 @@ using namespace std;
 class film
 {
 private:
+	int ID;
 	//film title
 	string title;
 	//collection of genre ID related to the film
@@ -15,16 +16,23 @@ public:
 	//public ID for Hashing
 	//default constructor
 	film() 
-	{
+	{	
+		ID = -1;
 		title = "";
 	};
 
 	//constructor with parameter
-	film(string title, vector<int> genres, vector<int> keywords)
+	film(int ID, string title, vector<int> genres, vector<int> keywords)
 	{	
+		this->ID = ID;
 		this->title = title;
 		this->genres = genres;
 		this->keywords = keywords;
+	}
+
+	int getID()
+	{
+		return ID;
 	}
 
 	//return the title for the film
@@ -45,6 +53,3 @@ public:
 		return this->keywords;
 	}
 };
-
-
-
