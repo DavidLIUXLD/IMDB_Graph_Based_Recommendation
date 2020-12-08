@@ -15,9 +15,7 @@ private:
 	//adjacentList for film nodes
 	unordered_map<film, vector<filmEdge>, filmHash> adjacentList;
 	//collection of all films 
-	unordered_set<film, filmHash> films;
-	
-	unordered_map<int, film> filmNames;
+	unordered_map<int, film> films;
 	
 	//return the inverse of jaccard similarity between two vectors,
 	//if the jaccard similiarity between given vectors is zero, return zero
@@ -55,7 +53,7 @@ public:
 		for (int i = 0; i <= filmCollection.size() - 1; i++) 
 		{
 			film movie(i, filmCollection.at(i), genreCollection.at(i), keywordCollection.at(i));
-			films.insert(movie);
+			films.insert(i) = movie;
 			storage.push_back(movie);
 		}
 		for (int i = 0; i <= films.size() - 1; i ++)
