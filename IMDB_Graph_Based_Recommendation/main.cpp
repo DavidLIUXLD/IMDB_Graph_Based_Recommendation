@@ -12,33 +12,46 @@ void read_Keywords(unordered_map<int, vector<int>> keywordCollection);
 
 int main()
 {
-	cout << "Welcome to the Supreme Movie Search!" << endl << endl;
-	
+    clock_t time_req;
 
-	clock_t time_req;
+    cout << "Welcome to the Supreme Movie Search!" << endl << endl;
 
-	// start time
-	time_req = clock();
-
-	// STUFF TO TIME HERE
+    // Graph data
 	unordered_map<int, string> filmCollection;
 	unordered_map<int, vector<int>> genreCollection;
     unordered_map<int, vector<int>> keywordCollection;
 
+    // read data from files
 	read_Meta(filmCollection, genreCollection);
     read_Keywords(keywordCollection);
 
+    // create graph
     filmGraph h(filmCollection, genreCollection, keywordCollection);
 
-    string movie;
 
+    string movie;
     cout << "Enter the name of the movie that you want recommendations for: ";
     cin >> movie;
 
-	// end time
-	time_req = clock() - time_req;
-	// how to calculate in seconds
-	cout << "Reading files took " << (float)time_req / CLOCKS_PER_SEC << " seconds to calculate" << endl;
+    int option = 1;
+    while (movie != "0") {
+
+
+
+
+        // start time
+        time_req = clock();
+
+
+        // STUFF TO TIME HERE
+
+
+        // end time
+        time_req = clock() - time_req;
+        // calculate and print out in seconds
+        cout << "Reading files took " << (float)time_req / CLOCKS_PER_SEC << " seconds to calculate" << endl;
+
+    }
 
 	return 0;
 }
@@ -72,7 +85,7 @@ void read_Meta(unordered_map<int, string>& filmCollection, unordered_map<int, ve
                 }
                 //genres
                 string throwaway;
-                getline(linestream, throwaway, ':');//
+                getline(linestream, throwaway, ':');
                 //use integer between colon and comma
                 getline(linestream, info, ',');
                 // add to vector in map
