@@ -88,8 +88,39 @@ public:
 			}
 		}
 	}
+	
+		bool findConnection(vector<filmEdge> &edges, filmEdge &find)
+	{
+		for (int i = 0; i < edges.size(); i++)
+		{
+			if (edges.at(i) == find)
+				return true;
+		}
+		return false;
+	}
 
+	void dijkstras(film source)
+	{
+		int* d;
+		int* p;
+		unordered_set<film, filmHash> S;
+		unordered_set<film, filmHash> VS = films;
 
+		for (auto iter = VS.begin(); iter != VS.end(); iter++)
+		{
+			if (found)
+			d[i] = INT_MAX;
+			p[i] = -1;
+		}
+
+		
+		while (!VS.empty())
+		{
+			for(int i = 0; i < )
+
+		}
+
+	}
 	
 };
 
