@@ -45,7 +45,7 @@ void read_Meta(unordered_map<int, string> &filmCollection, unordered_map<int, ve
                 getline(linestream, throwaway, ',');
 
             }
-            linestream.close();
+            linestream.clear();
         }
     }
 
@@ -84,7 +84,7 @@ void read_Keywords(unordered_map<int, vector<int>> keywordCollection) {//paramet
                 getline(linestream, throwaway, ',');
 
             }
-            linestream.close();
+            linestream.clear();
         }
     }
 
