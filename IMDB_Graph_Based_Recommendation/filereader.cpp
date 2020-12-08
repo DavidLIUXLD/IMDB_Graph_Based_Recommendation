@@ -1,7 +1,6 @@
 //
 // Created by Dillan Maraj on 12/4/20.
 //
-#pragma once
 #include "filereader.h"
 #include "filmGraph.h"
 #include <fstream>
